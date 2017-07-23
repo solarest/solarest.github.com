@@ -342,6 +342,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程之路/" itemprop="url" rel="index">
+                    <span itemprop="name">编程之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -378,113 +400,14 @@
 
       
         
-          
-            <h1 id="coding-月记系列-一"><a href="#coding-月记系列-一" class="headerlink" title="coding 月记系列(一)"></a>coding 月记系列(一)</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>开辟这个系列主要便是为了实时的记录自己的coding心得，更新周期会在一个月到两个月之间。一来是面向自己的学习记录，二来要是有幸分享应当会是不错的材料。</p>
-<h3 id="关于代码设计"><a href="#关于代码设计" class="headerlink" title="关于代码设计"></a>关于代码设计</h3><p>随着代码量的增多，我想我能够写出<code>合适的代码</code>的能力应该有所长进，所谓的<code>合适的代码</code>我想应该满足以下的几点:</p>
-<ul>
-<li><p>良好的语法认识<br>  能够在合理的时候利用<code>语言特性</code>和<code>语法糖</code>增强代码的可读性。例如:</p>
-<ol>
-<li><p>适当使用Java8的steam代替Java5中的foreach。</p>
-</li>
-<li><p>使用注解标定类型分别处理</p>
-</li>
-<li><p>清晰的对象封装</p>
-</li>
-</ol>
-</li>
-<li><p>保持良好的对象领域分层，在web应用中更加重要，<code>PO``VO``DO``DTO</code>正确区分和使用，良好的对象使用与分层可以保证代码责权使用的清晰，逻辑和物理上业务上的对应。</p>
-<p>   例如:计算一系列的数据，可以有如下操作:</p>
-<ol>
-<li><p>创建对象类，设定计算的参数</p>
-</li>
-<li><p>以结构体的形式传入参数</p>
-</li>
-<li><p>设定相关函数方法，如:参数更新、参数计算、结果输出</p>
-</li>
-</ol>
-</li>
-<li><p>责权分明的函数处理<br>   责权分明的函数应该具有的特性:</p>
-<ol>
-<li><p>使用安全性:只有特定的对象才可以访问</p>
-</li>
-<li><p>操作无副作用性:使用不会对其他对象产生影响(SRP原则)</p>
-</li>
-<li><p>调用明确性:进行委托时其他无关类不应该参与处理</p>
-</li>
-</ol>
-</li>
-<li><p>统一且有效的代码风格<br>   这一点应当是对于团队内部而言的，应当有流程文档加以约束，有code review环节加以规范。</p>
-</li>
-</ul>
-<p><em>关于对上述几点的具体补充，我以目前的想法进行理解和说明(期待今后更新和有新的感悟)</em></p>
-<h3 id="关于最近的一点点体会"><a href="#关于最近的一点点体会" class="headerlink" title="关于最近的一点点体会"></a>关于最近的一点点体会</h3><h4 id="对象的粒度"><a href="#对象的粒度" class="headerlink" title="对象的粒度"></a>对象的粒度</h4><ul>
-<li><p>创建对象的时机</p>
-<ol>
-<li><p>数据库层的映射和选取例如:<code>PO</code>以及<code>DO</code></p>
-</li>
-<li><p>业务逻辑中所使用的变量及其特有的方法如<code>DTO</code></p>
-</li>
-<li><p>展示视图的特有数据，一般来说<code>DTO</code>已经可以作为<code>controller层</code>的输出数据对象了，视图对象<code>VO</code>可以表达为前台展示的<code>xml</code> 、<code>excel</code>文件等数据(具有物理意义的数据组合)</p>
-</li>
-<li><p>多次的计算可以创建一个函数方法对象(一般来说参数多于3个就可以封装成为一个类了)</p>
-</li>
-</ol>
-</li>
-</ul>
-<h4 id="关于抽象的使用"><a href="#关于抽象的使用" class="headerlink" title="关于抽象的使用"></a>关于抽象的使用</h4><p>抽象类是对象的抽象，提供对象的<code>多态</code>方法</p>
-<ul>
-<li><p>为什么要使用抽象</p>
-<ol>
-<li><p>显式的声明需要被继承才可以被使用</p>
-</li>
-<li><p>提供被继承类的基础变量和基础方法限定必须实现的方法</p>
-</li>
-<li><p>被继承的类具有抽象类的所有变量和方法，使用<code>代理(反射出抽象类)</code>时可以使用不同继承的同名方法进行差异化处理</p>
-</li>
-</ol>
-</li>
-<li><p>什么时候使用抽象</p>
-<ol>
-<li><p>多各类在业务上含有相同的变量</p>
-</li>
-<li><p>多各类含有在业务上相同作用但实现方式各有区别的方法</p>
-</li>
-<li><p>显式需要被继承才可以被使用的类，常用于Maven发布的二方库，保证扩展性的同时满足安全性</p>
-</li>
-<li><p>实现适配器模式</p>
-</li>
-</ol>
-</li>
-</ul>
-<h4 id="关于接口的使用"><a href="#关于接口的使用" class="headerlink" title="关于接口的使用"></a>关于接口的使用</h4><p>接口是对方法的抽象，限定类的操作</p>
-<ul>
-<li><p>为什么要使用接口</p>
-<ol>
-<li><p>满足<code>service</code>层的风格</p>
-</li>
-<li><p>限定类必须实现的方法</p>
-</li>
-<li><p>传入接口进行handle处理,常用与线程的<code>excutor</code>中，例如:</p>
-</li>
-</ol>
-</li>
-</ul>
-<p><strong>Handle.class</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">interface</span> <span class="title">Handle</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">excute</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">exceptHandle</span><span class="params">(Exception e)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>Process.class</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">todo</span><span class="params">(Handle handle)</span></span>&#123;</div><div class="line">...</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">        handle.execute();</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">        handle.exceptHandle(e);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>什么时候要使用接口</p>
-<ol>
-<li><p>有多个类需要限定必要的方法实现时</p>
-</li>
-<li><p>如<code>service</code>层等用于显式用<code>Java doc</code>展示方法API时</p>
-</li>
-</ol>
-</li>
-</ul>
-
-          
+          <h1 id="coding-月记系列-一"><a href="#coding-月记系列-一" class="headerlink" title="coding 月记系列(一)"></a>coding 月记系列(一)</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>开辟这个系列主要便是为了实时的记录自己的coding心得，更新周期会在一个月到两个月之间。一来是面向自己的学习记录，二来要是有幸分享应当会是不错的材料。<br>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/07/23/coding月记系列（一）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -895,7 +818,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
