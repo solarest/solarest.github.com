@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/23/coding月记系列（一）/index.html">
 <meta property="og:site_name" content="Solarest's blog">
 <meta property="og:description" content="coding 月记系列(一)前言开辟这个系列主要便是为了实时的记录自己的coding心得，更新周期会在一个月到两个月之间。一来是面向自己的学习记录，二来要是有幸分享应当会是不错的材料。">
-<meta property="og:updated_time" content="2017-07-23T06:46:14.000Z">
+<meta property="og:updated_time" content="2017-07-24T15:11:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="coding月记系列（一）">
 <meta name="twitter:description" content="coding 月记系列(一)前言开辟这个系列主要便是为了实时的记录自己的coding心得，更新周期会在一个月到两个月之间。一来是面向自己的学习记录，二来要是有幸分享应当会是不错的材料。">
@@ -405,11 +405,9 @@
 </li>
 <li><p>使用注解标定类型分别处理</p>
 </li>
-<li><p>清晰的对象封装</p>
-</li>
 </ol>
 </li>
-<li><p>保持良好的对象领域分层，在web应用中更加重要，<code>PO</code>，<code>VO</code>，<code>DO</code>，<code>DTO</code>正确区分和使用，良好的对象使用与分层可以保证代码责权使用的清晰，逻辑和物理上业务上的对应。</p>
+<li><p>清晰的对象封装<br>  保持良好的对象领域分层，在web应用中更加重要，<code>PO</code>，<code>VO</code>，<code>DO</code>，<code>DTO</code>正确区分和使用，良好的对象使用与分层可以保证代码责权使用的清晰，逻辑和物理上业务上的对应。</p>
 <p>   例如:计算一系列的数据，可以有如下操作:</p>
 <ol>
 <li><p>创建对象类，设定计算的参数</p>
@@ -482,15 +480,13 @@
 <li><p>限定类必须实现的方法</p>
 </li>
 <li><p>传入接口进行handle处理,常用与线程的<code>excutor</code>中，例如:</p>
+<p><strong> Handle.class</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">interface</span> <span class="title">Handle</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">excute</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">exceptHandle</span><span class="params">(Exception e)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>Process.class</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">todo</span><span class="params">(Handle handle)</span></span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        handle.execute();</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">        handle.exceptHandle(e);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
-</ul>
-<p><strong>Handle.class</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">interface</span> <span class="title">Handle</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">excute</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">exceptHandle</span><span class="params">(Exception e)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>Process.class</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">todo</span><span class="params">(Handle handle)</span></span>&#123;</div><div class="line">...</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">        handle.execute();</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">        handle.exceptHandle(e);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
 <li><p>什么时候要使用接口</p>
 <ol>
 <li><p>有多个类需要限定必要的方法实现时</p>
